@@ -17,22 +17,15 @@ export class DirectorsComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
-    this.getReals().subscribe(
+    this.getDirector().subscribe(
       data => { this.directors = data; }
     )
   }
 
-  /**
-   * Recupere la liste des realisateurs depuis l'API
-   */
-  getReals(): Observable<Director[]> {
+  getDirector(): Observable<Director[]> {
     return this.http.get<Director[]>('http://localhost:8080/director');
   }
 
-  /**
-   * Ajoute un realisateur à la base de donnees à partir du formulaire d'ajout rempli par l'utilisateur
-   * @param form le formulaire rempli
-   */
   processAddingForm(form): Observable<Director> {
     if (form.invalid) {
       alert("The form is incorrect")
@@ -43,10 +36,6 @@ export class DirectorsComponent implements OnInit {
     location.reload();
   }
 
-  /**
-   * Bouton details d'un realisateur
-   * @param id l'id du realisateur
-   */
   btnClick(id: number): void {
     this.router.navigateByUrl('/director/' + id.toString());
   }

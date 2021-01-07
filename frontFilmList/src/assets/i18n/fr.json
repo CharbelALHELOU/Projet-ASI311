@@ -14,19 +14,11 @@
             "CANCEL": "Annuler"
         }
     },
-    "reals-detail": {
-        "BIO": "Biographie",
-        "FILMO": "Filmographie",
-        "UPDATEDIR": "Mettre à jour ce director",
-        "DELETE": "Supprimer",
-        "UPDATE": "Mettre à jour",
-        "OTHER": "Voir les autres realisateurs"
-    },
     "films": {
         "TITLE": "Titre",
         "ORDER": "Trier par",
         "SIZE": "Taille de page",
-        "NON": "Aucun element ne correspond à votre recherche.",
+        "NORESULT": "Aucun resultat.",
         "form": {
             "ADDFILM": "Ajouter un film",
             "DIRECTOR": "Nom du realisateur",

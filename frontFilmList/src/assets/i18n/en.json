@@ -14,19 +14,12 @@
             "CANCEL": "Cancel"
         }
     },
-    "reals-det": {
-        "BIO": "Biography",
-        "FILMO": "Films",
-        "MAJ": "Update this director",
-        "DEL": "Delete this director",
-        "UPDATE": "Update",
-        "OTHER": "See other directors"
-    },
+
     "films": {
         "TITLE": "Title",
         "ORDER": "Order by",
         "SIZE": "Page size",
-        "NON": "No element matching your research was found.",
+        "NORESULT": "No result.",
         "form": {
             "ADDFILM": "Add a film",
             "DIRECTOR": "Director",
@@ -36,8 +29,8 @@
             "ALL": "All the films"
         }
     },
-    "films-det": {
-        "DUR": "Film duration",
+    "films-detail": {
+        "DUR": "Duration",
         "DIRECTOR": "Director",
         "DELETE": "Delete",
         "UPDATE": "Modify"

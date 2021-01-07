@@ -18,22 +18,16 @@ export class DashboardComponent implements OnInit {
     this.getFilmsCount().subscribe(
       data => { this.filmsCount = data }
     )
-    this.getRealsCount().subscribe(
+    this.getDirectorCount().subscribe(
       data => { this.realsCount = data }
     )
   }
 
-  /**
-   * Recupere le compte des films
-   */
   getFilmsCount(): Observable<number> {
     return this.http.get<number>('http://localhost:8080/film/count')
   }
 
-  /**
-   * Recupere le compte des realisateurs
-   */
-  getRealsCount(): Observable<number> {
+  getDirectorCount(): Observable<number> {
     return this.http.get<number>('http://localhost:8080/director/count')
   }
 

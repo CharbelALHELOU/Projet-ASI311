@@ -35,16 +35,10 @@ export class FilmDetailComponent implements OnInit {
     this.showForm = false;
   }
 
-  /**
-   * Recupere le film corrspondant à l'id de cette page
-   */
   getFilm(): Observable<Film> {
     return this.http.get<Film>('http://localhost:8080/film/{id}?id=' + this.id.toString());
   }
 
-  /**
-   * Supprime le film 
-   */
   deleteFilm(): void {
     if (confirm("Are you sure?")) {
       console.log(this.film);
@@ -63,10 +57,6 @@ export class FilmDetailComponent implements OnInit {
     return this.http.get<Director[]>('http://localhost:8080/director');
   }
 
-  /**
-   * Met à jour le film à partir du formulaire de mise à jour rempli par l'utilisateur
-   * @param form le formulaire recupere au submit
-   */
   processUpdateForm(form): Observable<Film> {
     if (form.invalid) {
       alert("The form is incorrect")

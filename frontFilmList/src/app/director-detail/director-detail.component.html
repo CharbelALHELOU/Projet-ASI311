@@ -3,93 +3,82 @@
         <div class="row">
             <div class="col col-12" style="padding: 20px;">
                 <div class="card mb-3">
-                    <h3 class="card-header">{{director.firstName}} {{director.lastName}}</h3>
-                    <div class="card-body">
-                        <h5 class="card-title">ID : {{director.id}}</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">{{'reals-det.BIO' | translate}} : Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit.
-                            Praesent sed ante nec felis sagittis vulputate. Orci varius natoque penatibus et magnis dis
-                            parturient montes, nascetur ridiculus mus. Curabitur semper metus augue, non maximus metus
-                            laoreet laoreet. Aenean rutrum gravida velit, eget ullamcorper odio tincidunt id. In massa
-                            sem, pharetra eu semper vitae, condimentum nec velit. In fermentum accumsan risus sed
-                            fringilla. Nulla accumsan lacus augue, vel commodo ex consequat non. Donec odio sapien,
-                            congue nec justo eget, tempor tempus eros. Aliquam erat volutpat. Aenean finibus consequat
-                            metus id vehicula. Nulla eleifend ante enim, ac euismod arcu vulputate et. Fusce mattis
-                            tellus eget nulla fermentum fringilla. Nullam bibendum dui et auctor dictum. </p>
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-11">
+                                <h3 class="">{{director.firstName}} {{director.lastName}}</h3>
+                            </div>
+                            <div class="col-1 pr-3">
+                                <button type=button class="btn btn-danger" (click)="deleteDirector()">{{'films-detail.DELETE' | translate}}</button>
+                            </div>
+                        </div>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">{{'reals.DATE' | translate}} : {{director.date}}</li>
-                        <li class="list-group-item">{{'reals-det.FILMO' | translate}} : TODO</li>
-                    </ul>
-                    <div class="card-body">
-                        <button type=button class="btn btn-success" (click)="clickShowForm()">{{'reals-det.MAJ' |
-                            translate}}</button>
-                        <button type=button class="btn btn-outline-warning"
-                            (click)="deleteDirector()">{{'reals-det.DEL' | translate}}</button>
-                    </div>
-                    <div class="col col-12" style="padding: 20px;" *ngIf="showForm">
+                        <li class="list-group-item">{{'director.DATE' | translate}} : {{director.date}}</li>
+                        <li class="list-group-item btn" (click)="showFilms()">FILMS (click to see)
+                            <div class=" bs-content table-responsive" *ngIf="show === true ">
+                                <table class="table table-hover ">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">{{'films.TITLE' | translate}}</th>
+                                            <th scope="col">{{'films-detail.DUR' | translate}} (min)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngFor="let film of films">
+                                        <tr class="table pointer">
+                                            <td>{{film.id}}</td>
+                                            <td>{{film.titre}}</td>
+                                            <td>{{film.duration}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </li>
+                    </ul>                    
+                    
+                    <div class="col col-12" style="padding: 20px;">
                         <div *ngIf="updateForm.submitted" class="alert alert-info">
                             Form submitted
                         </div>
                         <form #updateForm="ngForm" (ngSubmit)="processUpdateForm(updateForm)">
                             <fieldset>
-                                <legend>{{'reals-det.MAJ' | translate}}</legend>
+                                <legend>{{'films-detail.UPDATE' | translate}}</legend>
                                 <div class="form-group row">
                                     <div class="col col-sm-6">
-                                        <label for="firstName" class="col-sm-4 col-form-label">{{'reals.FIRSTNAME' |
-                                            translate}}</label>
-                                        <input id="firstName" type="text" name="firstName" class="form-control"
+                                        <label for="firstName" class="col-sm-4 col-form-label">{{'director.FIRSTNAME' |
+                                            translate}}*</label>
+                                        <input id="firstName" type="text" name="firstName*" class="form-control"
                                             placeholder="Enter First Name" #posterPrenom="ngModel" ngModel required>
-                                        <div
-                                            *ngIf="posterPrenom.invalid && (posterPrenom.touched || posterPrenom.dirty)">
-                                            <div *ngIf="posterPrenom.errors.required" class="alert alert-danger">
-                                                {{'reals.form.FNREQ' | translate}}
-                                            </div>
-                                        </div>
                                     </div>
                                     <div class="col-sm-6">
 
-                                        <label for="lastName" class="col-sm-4 col-form-label">{{'reals.LASTNAME' |
-                                            translate}}</label>
+                                        <label for="lastName" class="col-sm-4 col-form-label">{{'director.LASTNAME' |
+                                            translate}}*</label>
                                         <input id="lastName" type="text" placeholder="Entrer Last Name" name="lastName"
                                             class="form-control" #posterNom="ngModel" ngModel required>
-                                        <div *ngIf="posterNom.invalid && (posterNom.touched || posterNom.dirty)">
-                                            <div *ngIf="posterNom.errors.required" class="alert alert-danger">
-                                                {{'reals.form.NREQ' | translate}}
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
 
                                     <div class="col  col-12">
-                                        <label for="date" class="col-sm-8 col-form-label">{{'reals.DATE' |
-                                            translate}}</label>
+                                        <label for="date" class="col-sm-8 col-form-label">{{'director.DATE' |
+                                            translate}}*</label>
                                         <input id="date" type="date" class="form-control" name="date"
                                             #posterDate="ngModel" ngModel required>
-                                        <div *ngIf="posterDate.invalid && (posterDate.touched || posterDate.dirty)">
-                                            <div *ngIf="posterDate.errors.required" class="alert alert-danger">
-                                                {{'reals.form.DREQ' | translate}}
-                                            </div>
-                                        </div>
                                     </div>
 
                                 </div>
                                 <div class="btn btn-group">
-                                    <button class="btn btn-success" [disabled]="updateForm.invalid"
-                                        type="submit">{{'reals-det.UPDATE' | translate}}</button>
-                                    <button class="btn btn-outline-primary" type="reset"
-                                        (click)="clickHideForm()">{{'reals.form.CANCEL' | translate}}</button>
+                                    <button class="btn btn-success" [disabled]="updateForm.invalid" type="submit"> {{'films-detail.UPDATE' | translate}}</button>
+                                    <button class="btn btn-warning" type="reset"> {{'director.form.CANCEL'|translate}}</button>
                                 </div>
                             </fieldset>
                         </form>
                     </div>
-                    <button type="button" class="btn btn-primary" (click)="btnClick();">
-                        {{'reals-det.OTHER' | translate}}
-                    </button>
+                    
                 </div>
             </div>
         </div>

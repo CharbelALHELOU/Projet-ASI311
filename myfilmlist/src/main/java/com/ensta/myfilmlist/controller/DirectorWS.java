@@ -34,27 +34,16 @@ public class DirectorWS {
         this.directorService = directorService;
     }
 
-
-    /**
-     * Count directors
-     * @return le statut de la requête
-     * @throws ControllerException problème lors de l'appel au service
-     */
     @GetMapping("count")
     @ApiOperation(value = "Return nbre of directors")
-    public ResponseEntity<Long> getRealsCount() throws ControllerException {
+    public ResponseEntity<Long> getDirectorCount() throws ControllerException {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(directorService.countReals());
+            return ResponseEntity.status(HttpStatus.OK).body(directorService.countDirector());
         } catch (ServiceException e) {
             throw new ControllerException(e.getMessage());
         }   
     }
-    
-     /**
-     * Get list of directors from the service
-     * @return status
-     * @throws ControllerException problem calling the service
-     */
+
     @GetMapping
     @ApiOperation(value = "Get list of directors")
     public ResponseEntity<List<DirectorDTO>> retrieveDirector() throws ControllerException {
@@ -65,11 +54,6 @@ public class DirectorWS {
         }
     }
 
-    /**
-     * Get a director from an id
-     * @return status
-     * @throws ControllerException problem calling the service
-     */
     @GetMapping("{id}")
     @ApiOperation(value = "Get a director")
     public ResponseEntity<DirectorDTO> retrieveDirectorById(@RequestParam String id) throws ControllerException {
@@ -80,13 +64,8 @@ public class DirectorWS {
         }
     }
 
-    /**
-     * Crée un director dans la BDD
-     * @return le statut de la requête
-     * @throws ControllerException problème lors de l'appel au service
-     */
     @PostMapping()
-    @ApiOperation(value = "Créer un director dans la BDD")
+    @ApiOperation(value = "Add a director to data base")
     public ResponseEntity<DirectorDTO> createDirector(@RequestBody DirectorDTO director) throws ControllerException {
         try {
             directorService.create(director);
@@ -96,13 +75,9 @@ public class DirectorWS {
         }   
     }
 
-    /**
-     * Supprime un director de la BDD
-     * @return le statut de la requête
-     * @throws ControllerException problème lors de l'appel au service
-     */
+
     @DeleteMapping()
-    @ApiOperation(value = "Supprime un director de la BDD")
+    @ApiOperation(value = "Delete director from data base")
     public ResponseEntity<String> deleteDirector(@RequestParam String id) throws ControllerException {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(directorService.delete(id));
@@ -112,13 +87,8 @@ public class DirectorWS {
         }   
     }
 
-    /**
-     * Update les champs d'un director avec ceux du directorl donné en paramètre
-     * @return le statut de la requete
-     * @throws ControllerException problème lors de l'appel au service 
-     */
     @PutMapping()
-    @ApiOperation(value = "Update un director de la BDD")
+    @ApiOperation(value = "Update a director")
     public ResponseEntity<Integer> updateDirector(@RequestBody DirectorDTO director) throws ControllerException {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(directorService.update(director));

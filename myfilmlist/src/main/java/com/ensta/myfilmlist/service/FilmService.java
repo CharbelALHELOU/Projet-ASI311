@@ -27,11 +27,6 @@ public class FilmService {
         this.directorService = directorService;
     }
 
-    /**
-     * Récupère la liste des films en List<FilmPojo>, l'envoie au mapper pour récupérer la liste en modèle, puis renvoie ce modèle au mapper pour recevoir la liste en List<FilmDTO> qui est finalement retournée
-     * @return la liste de tous les films au format List<FilmDTO>
-     * @throws ServiceException problème lors de l'accès au DAO
-     */
     public List<FilmDTO> findAll(int number,int size, String order, boolean sens) throws ServiceException {
         List<Film> listFilmModel;
         List<DirectorDTO> listDirectorDTO;
@@ -44,12 +39,6 @@ public class FilmService {
         return FilmMapper.listFilmToListFilmDTO(listFilmModel,listDirectorDTO);
     }
 
-    /**
-     * renvoie le lastNamebre total de pages
-     * @param size la taille d'une page (int)
-     * @return le lastNamebre total de pages
-     * @throws ServiceExceptionproblème lors de l'accès au DAO
-     */
     public long getTotal(int size) throws ServiceException {
         long total; 
         try {
@@ -60,11 +49,6 @@ public class FilmService {
         return total;
     }
 
-    /**
-     * renvoie le lastNamebre total de films
-     * @return le lastNamebre total de films
-     * @throws ServiceExceptionproblème lors de l'accès au DAO
-     */
     public long countFilms() throws ServiceException {
         long total; 
         try {
@@ -75,27 +59,16 @@ public class FilmService {
         return total;
     }
 
-    /**
-     * renvoie le lastNamebre total de pages avec un filtre
-     * @param size la taille d'une page (int)
-     * @return le lastNamebre total de pages
-     * @throws ServiceExceptionproblème lors de l'accès au DAO
-     */
-    public long getTotalWithFilter(String titre, String real, int size) throws ServiceException {
+    public long getTotalWithFilter(String titre, String director, int size) throws ServiceException {
         long total; 
         try {
-            total = filmDAO.countFilmsFiltered(titre,real)/size + 1 ;
+            total = filmDAO.countFilmsFiltered(titre,director)/size + 1 ;
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage());
         }
         return total;
     }
 
-    /**
-     * Récupère un film a partir de son ID
-     * @return le film cherché
-     * @throws ServiceException problème lors de l'accès au DAO
-     */
     public FilmDTO findById(String id) throws ServiceException {
         Film filmModel;
         DirectorDTO directorDTO;
@@ -108,27 +81,18 @@ public class FilmService {
         return FilmMapper.filmToFilmDTO(filmModel, directorDTO);
     }
 
-    /**
-     * Récupère une liste de films en fonction du filtre (titre,real)
-     * @return la liste de films
-     * @throws ServiceException problème lors de l'accès au DAO
-     */
-    public List<FilmDTO> findWithFilter(String titre, String real, int number, int size, String order, boolean reverse) throws ServiceException {
+    public List<FilmDTO> findWithFilter(String titre, String director, int number, int size, String order, boolean reverse) throws ServiceException {
         List<Film> listFilmModel;
         List<DirectorDTO> listDirectorDTO;
         try {
-            listFilmModel = FilmMapper.listFilmPojoToListFilm(filmDAO.findWithFilter(titre, real, number, size, order, reverse));
+            listFilmModel = FilmMapper.listFilmPojoToListFilm(filmDAO.findWithFilter(titre, director, number, size, order, reverse));
             listDirectorDTO = directorService.findAll(); 
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage());
         }
         return FilmMapper.listFilmToListFilmDTO(listFilmModel,listDirectorDTO);
     }
-    /**
-     * Créer un film dans la BDD
-     * @return le film crée
-     * @throws ServiceException problème lors de l'accès au DAO
-     */
+
     public void create(FilmDTO film) throws ServiceException {
         try {
            filmDAO.create(FilmMapper.filmToFilmPojo(FilmMapper.filmDTOToFilm(film)));
@@ -137,11 +101,6 @@ public class FilmService {
         }
     }
 
-    /**
-     * Supprime un film de la BDD
-     * @return le film supprimé
-     * @throws ServiceException problème lors de l'accès au DAO
-     */
     public String delete(String id) throws ServiceException {
         try {
            String returnId = filmDAO.delete(id);
@@ -151,12 +110,6 @@ public class FilmService {
         }
     }
 
-    
-    /**
-     * Update un film dans la BDD
-     * @return le film mis à jour
-     * @throws ServiceException problème lors de l'accès au DAO
-     */
     public Integer update(FilmDTO film) throws ServiceException {
         try {
            return filmDAO.update(FilmMapper.filmToFilmPojo(FilmMapper.filmDTOToFilm(film)));

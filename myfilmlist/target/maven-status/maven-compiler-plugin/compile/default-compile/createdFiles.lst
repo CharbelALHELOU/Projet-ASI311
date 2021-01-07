@@ -14,3 +14,4 @@ com/ensta/myfilmlist/model/Film.class
 com/ensta/myfilmlist/ServletInitializer.class
 com/ensta/myfilmlist/SpringConfig$1.class
 com/ensta/myfilmlist/pojo/FilmPojo.class
+com/ensta/myfilmlist/model/Genre.class

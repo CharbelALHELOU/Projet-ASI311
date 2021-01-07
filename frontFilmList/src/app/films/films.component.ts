@@ -46,7 +46,7 @@ export class FilmsComponent implements OnInit {
   }
 
   getFilmsFiltered(): Observable<FilmPage> {
-    return this.http.get<FilmPage>('http://localhost:8080/film/{titre}/{real}?titre=' + this.titleFilter + '&real=' + this.realFilter + '&number=' + this.number + '&size=' + this.size + '&order=' + this.order + '&reverse=' + this.reverse);
+    return this.http.get<FilmPage>('http://localhost:8080/film/{titre}/{director}?titre=' + this.titleFilter + '&director=' + this.realFilter + '&number=' + this.number + '&size=' + this.size + '&order=' + this.order + '&reverse=' + this.reverse);
   }
 
   getDirectors(): Observable<Director[]> {
@@ -135,6 +135,8 @@ export class FilmsComponent implements OnInit {
 
   setSize(size: number) {
     this.size = size
+    this.number = 1;
+    this.showFilms;
   }
 
 }

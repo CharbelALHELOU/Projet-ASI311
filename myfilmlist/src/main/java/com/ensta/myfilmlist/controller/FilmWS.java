@@ -33,13 +33,8 @@ public class FilmWS {
         this.filmService = filmService;
     }
 
-    /**
-     * Récupère la liste des films au format List<FilmDTO> retournée par le service
-     * @return le statut de la requête 
-     * @throws ControllerException problème lors de l'appel au service
-     */
     @GetMapping
-    @ApiOperation(value = "Récupère la liste des films")
+    @ApiOperation(value = "Get list of films")
     public ResponseEntity<PageDTO<FilmDTO>> retrieveFilm(@RequestParam int number, @RequestParam int size, @RequestParam String order, @RequestParam boolean sens) throws ControllerException {
         try {
             long total = filmService.getTotal(size);
@@ -54,13 +49,8 @@ public class FilmWS {
         }
     }
 
-    /**
-     * Récupère un film à partir de son id
-     * @return le statut de la requête 
-     * @throws ControllerException problème lors de l'appel au service
-     */
     @GetMapping("{id}")
-    @ApiOperation(value = "Récupère un film")
+    @ApiOperation(value = "Get film by id")
     public ResponseEntity<FilmDTO> retrieveFilmById(@RequestParam String id) throws ControllerException {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(filmService.findById(id));
@@ -69,17 +59,12 @@ public class FilmWS {
         }
     }
 
-    /**
-     * Récupère une liste de films filtrée par le titre et le lastName du réalisateur
-     * @return le statut de la requête 
-     * @throws ControllerException problème lors de l'appel au service
-     */
-    @GetMapping("{titre}/{real}")
-    @ApiOperation(value = "Récupère une liste de films filtrée")
-    public ResponseEntity<PageDTO<FilmDTO>> retrieveFilmsWithFilter(@RequestParam String titre, @RequestParam String real, @RequestParam int number, @RequestParam int size, @RequestParam String order, @RequestParam boolean reverse) throws ControllerException {
+    @GetMapping("{titre}/{director}")
+    @ApiOperation(value = "get films with")
+    public ResponseEntity<PageDTO<FilmDTO>> retrieveFilmsWithFilter(@RequestParam String titre, @RequestParam String director, @RequestParam int number, @RequestParam int size, @RequestParam String order, @RequestParam boolean reverse) throws ControllerException {
         try {
-            long total = filmService.getTotalWithFilter(titre,real,size); 
-            List<FilmDTO> films = filmService.findWithFilter(titre,real,number,size,order,reverse);
+            long total = filmService.getTotalWithFilter(titre,director,size); 
+            List<FilmDTO> films = filmService.findWithFilter(titre,director,number,size,order,reverse);
             PageDTO<FilmDTO> page = new PageDTO<FilmDTO>(number,size,total,films);
             return ResponseEntity.status(HttpStatus.OK).body(page);
         } catch (ServiceException e) {
@@ -87,11 +72,6 @@ public class FilmWS {
         }
     }
 
-    /**
-     * Compte la totalité des films de la BDD
-     * @return le statut de la requête
-     * @throws ControllerException problème lors de l'appel au service
-     */
     @GetMapping("count")
     @ApiOperation(value = "Renvoie le lastNamebre de films dans la BDD")
     public ResponseEntity<Long> getFilmsCount() throws ControllerException {
@@ -102,13 +82,8 @@ public class FilmWS {
         }   
     }
 
-    /**
-     * Crée un film dans la BDD
-     * @return le statut de la requête
-     * @throws ControllerException problème lors de l'appel au service
-     */
     @PostMapping()
-    @ApiOperation(value = "Créer un film dans la BDD")
+    @ApiOperation(value = "Add a film to database")
     public ResponseEntity<FilmDTO> createFilm(@RequestBody FilmDTO film) throws ControllerException {
         try {
             filmService.create(film);
@@ -118,13 +93,8 @@ public class FilmWS {
         }   
     }
 
-    /**
-     * Supprime un film de la BDD
-     * @return le statut de la requête
-     * @throws ControllerException problème lors de l'appel au service
-     */
     @DeleteMapping()
-    @ApiOperation(value = "Supprime un film de la BDD")
+    @ApiOperation(value = "Delete film from data base")
     public ResponseEntity<String> deleteFilm(@RequestParam String id) throws ControllerException {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(filmService.delete(id));
@@ -133,13 +103,8 @@ public class FilmWS {
         }   
     }
 
-    /**
-     * Update les champs d'un film avec ceux du filml donné en paramètre
-     * @return le statut de la requete
-     * @throws ControllerException problème lors de l'appel au service 
-     */
     @PutMapping()
-    @ApiOperation(value = "Update un film de la BDD")
+    @ApiOperation(value = "Update film in data base")
     public ResponseEntity<Integer> updateFilm(@RequestBody FilmDTO film) throws ControllerException {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(filmService.update(film));

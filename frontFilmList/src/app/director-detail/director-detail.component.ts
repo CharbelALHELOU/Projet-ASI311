@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Director } from '../directors/director.model';
+import { Film } from '../films/film.model';
+import { FilmPage } from '../films/filmpage.modele';
 
 @Component({
   selector: 'app-director-detail',
@@ -13,8 +15,13 @@ export class DirectorDetailComponent implements OnInit {
 
   id: number;
   director: Director = new Director();
-  updated_director: Director = new Director();
+  updatedDirector: Director = new Director();
   showForm: Boolean;
+  films: Film[];
+  number: number = 1;
+  size: number = 10;
+  total: number = 1;
+  show : boolean = false;
 
   constructor(private http: HttpClient, private activatedRoute: ActivatedRoute, private router: Router) { }
 
@@ -22,22 +29,20 @@ export class DirectorDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe(parameter => {
       this.id = +parameter.id;
     })
-    this.getReal().subscribe(
+    this.getDirector().subscribe(
       data => { this.director = data }
     )
     this.showForm = false;
   }
 
-  /**
-   * Recupere le realisateur de cette page à partir de l'id
-   */
-  getReal(): Observable<Director> {
+  getFilmsFiltered(): Observable<FilmPage> {
+    return this.http.get<FilmPage>('http://localhost:8080/film/{titre}/{director}?titre=&director=' + this.director.firstName + ' ' + this.director.lastName + '&number=1&size=50&order=id&reverse=false');
+  }
+
+  getDirector(): Observable<Director> {
     return this.http.get<Director>('http://localhost:8080/director/{id}?id=' + this.id.toString());
   }
 
-  /**
-   * Supprime le realisateur courant de la base de donnees
-   */
   deleteDirector(): void {
     if (confirm("Assurez-vous d'avoir au prealable supprime les films de ce realisteur.\n \nÊtes-vous sur de vouloir supprimer ce director : " + this.director.firstName + " " + this.director.lastName)) {
       console.log(this.director);
@@ -48,41 +53,23 @@ export class DirectorDetailComponent implements OnInit {
     }
   }
 
-  /**
-   * Montre le formulaire de mise à jour du realisateur
-   */
-  clickShowForm(): void {
-    this.showForm = true;
+  showFilms(){
+    this.show = true;
+    this.getFilmsFiltered().subscribe(
+      page => {this.films = page.data; this.number = page.number; this.size = page.size; this.total = page.total;}
+    )
   }
 
-  /**
-   * Cache le formulaire de mise à jour du realisateur
-   */
-  clickHideForm(): void {
-    this.showForm = false;
-  }
-
-  /**
-   * Bouton retour à la liste des realisateurs
-   */
-  btnClick(): void {
-    this.router.navigateByUrl('/director')
-  }
-
-  /**
-   * Mise à jour du realisateur avec l'API 
-   * @param form le formulaire de mise à jour rempli
-   */
   processUpdateForm(form): Observable<Director> {
     if (form.invalid) {
       alert("The form is incorrect")
       return;
     }
-    this.updated_director.id = this.director.id;
-    this.updated_director.firstName = form.value.firstName;
-    this.updated_director.lastName = form.value.lastName;
-    this.updated_director.date = form.value.date;
-    this.http.put<Director>('http://localhost:8080/director', this.updated_director).subscribe();
+    this.updatedDirector.id = this.director.id;
+    this.updatedDirector.firstName = form.value.firstName;
+    this.updatedDirector.lastName = form.value.lastName;
+    this.updatedDirector.date = form.value.date;
+    this.http.put<Director>('http://localhost:8080/director', this.updatedDirector).subscribe();
     location.reload();
   }
 }
