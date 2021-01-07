@@ -1,0 +1,16 @@
+com/ensta/myfilmlist/dto/PageDTO.class
+com/ensta/myfilmlist/MyfilmlistApplication.class
+com/ensta/myfilmlist/dto/FilmDTO.class
+com/ensta/myfilmlist/persistence/ConnectionManager.class
+com/ensta/myfilmlist/dao/FilmDAO.class
+com/ensta/myfilmlist/controller/FilmWS.class
+com/ensta/myfilmlist/exception/ServiceException.class
+com/ensta/myfilmlist/SpringConfig.class
+com/ensta/myfilmlist/exception/ControllerException.class
+com/ensta/myfilmlist/mapper/FilmMapper.class
+com/ensta/myfilmlist/exception/DaoException.class
+com/ensta/myfilmlist/service/FilmService.class
+com/ensta/myfilmlist/model/Film.class
+com/ensta/myfilmlist/ServletInitializer.class
+com/ensta/myfilmlist/SpringConfig$1.class
+com/ensta/myfilmlist/pojo/FilmPojo.class

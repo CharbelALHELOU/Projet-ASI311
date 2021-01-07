@@ -1,0 +1,71 @@
+<main role="main">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col col-6 border-right" style="padding: 20px;  border-width:5px !important;">
+                <div class="page-header">
+                    <h1>{{'director.DIRECTOR'|translate}}</h1>
+                </div>
+                <div class="bs-content table-responsive">
+                    <table class="table table-hover ">
+                        <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">{{'director.LASTNAME' | translate}}</th>
+                                <th scope="col">{{'director.FIRSTNAME'|translate}}</th>
+                                <th scope="col">{{'director.DATE'|translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let director of directors">
+                            <tr class="table pointer" (click)="btnClick(director.id);">
+                                <td>{{director.id}}</td>
+                                <td>{{director.lastName}}</td>
+                                <td>{{director.firstName}}</td>
+                                <td>{{director.date}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col col-6" style="padding: 20px;">
+                <div *ngIf="addingForm.submitted" class="alert alert-info">
+                    Form submitted
+                </div>
+                <form #addingForm="ngForm" (ngSubmit)="processAddingForm(addingForm)">
+                    <fieldset>
+                        <legend>{{'director.form.ADDDIRECTOR'|translate}}</legend>
+                        <div class="form-group row">
+                            <div class="col col-sm-6">
+                                <label for="firstName"
+                                    class="col-sm-2 col-form-label">{{'director.FIRSTNAME'|translate}}*</label>
+                                <input id="firstName" type="text" name="firstName" class="form-control"
+                                    placeholder="Enter FirstName" #posterPrenom="ngModel" ngModel required>
+                            </div>
+                            <div class="col-sm-6">
+
+                                <label for="lastName" class="col-sm-4 col-form-label">{{'director.LASTNAME'|translate}}*</label>
+                                <input id="lastName" type="text" placeholder="Entrer Last Name" name="lastName" class="form-control"
+                                    #posterNom="ngModel" ngModel required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+
+                            <div class="col  col-12">
+                                <label for="date" class="col-sm-8 col-form-label">{{'director.DATE'|translate}} *</label>
+                                <input id="date" type="date" class="form-control" name="date" #posterDate="ngModel"
+                                    ngModel required>
+                            </div>
+
+                        </div>
+                        <div class="btn btn-group">
+                            <button class="btn btn-success" [disabled]="addingForm.invalid"
+                                type="submit">{{'director.form.ADD'|translate}}</button>
+                            <button class="btn btn-danger"
+                                type="reset">{{'director.form.CANCEL'|translate}}</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>

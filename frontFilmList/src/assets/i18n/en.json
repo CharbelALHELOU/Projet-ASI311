@@ -1,0 +1,49 @@
+{
+    "header": {
+        "HOME": "Home",
+        "DIRECTORS": "Directors"
+    },
+    "director": {
+        "DIRECTOR": "Directors",
+        "LASTNAME": "Last Name",
+        "FIRSTNAME": "First Name",
+        "DATE": "Birth date",
+        "form": {
+            "ADDDIRECTOR": "Add a director",
+            "ADD": "Add",
+            "CANCEL": "Cancel"
+        }
+    },
+    "reals-det": {
+        "BIO": "Biography",
+        "FILMO": "Films",
+        "MAJ": "Update this director",
+        "DEL": "Delete this director",
+        "UPDATE": "Update",
+        "OTHER": "See other directors"
+    },
+    "films": {
+        "TITLE": "Title",
+        "ORDER": "Order by",
+        "SIZE": "Page size",
+        "NON": "No element matching your research was found.",
+        "form": {
+            "ADDFILM": "Add a film",
+            "DIRECTOR": "Director",
+            "ADD": "Add",
+            "CANCEL": "Cancel",
+            "FIL": "Filter",
+            "ALL": "All the films"
+        }
+    },
+    "films-det": {
+        "DUR": "Film duration",
+        "DIRECTOR": "Director",
+        "DELETE": "Delete",
+        "UPDATE": "Modify"
+    },
+    "dashboard": {
+        "MOREFILM": "See Films",
+        "MOREDIR": "See Directors"
+    }
+}

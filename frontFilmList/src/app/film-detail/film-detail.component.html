@@ -1,0 +1,66 @@
+<main role="main">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col col-12" style="padding: 20px;">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-11">
+                                <h3 class="">{{film.titre}}</h3>
+                            </div>
+                            <div class="col-1 pr-3">
+                                <button type=button class="btn btn-danger" (click)="deleteFilm()">{{'films-detail.DELETE' | translate}}</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-body">
+                        <h5 class="card-title">ID : {{film.id}}</h5>
+                        <h6 >{{'films-detail.DUR' | translate}} : {{film.duration}}</h6>
+                        <h6 >{{'films-detail.DIRECTOR' | translate}} : {{film.directorName}}</h6>
+                    </div>
+                    
+                    
+                    <div class="col col-12">
+                        <form #updateForm="ngForm" (ngSubmit)="processUpdateForm(updateForm)">
+                            <fieldset>
+                                <legend>{{'films-detail.UPDATE' | translate}}</legend>
+                                <div class="form-group row">
+                                    <div class="col col-sm-6">
+                                        <label for="title" class="col-sm-2 col-form-label">Titre *</label>
+                                        <input id="title" type="text" name="title" class="form-control"
+                                            placeholder="Enter title" #posterTitre="ngModel" ngModel required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="duration" class="col-sm-4 col-form-label"> {{'films-detail.DUR' | translate}} (min) *</label>
+                                        <input id="duration" type="text" placeholder="Enter duration" name="duration"
+                                            class="form-control" #posterDuration="ngModel" ngModel required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+
+                                    <div class="col  col-12">
+                                        <label for="selected_real" class="col-sm-8 col-form-label"> {{'films.form.DIRECTOR' | translate}}</label>
+                                        <div class="select">
+                                            <select class="form-control" id="selected_real" name="selected_real"
+                                                [(ngModel)]="selected_real" #selectedReal required>
+                                                <option *ngFor="let director of directors"
+                                                    [ngValue]='director'>
+                                                    {{director.firstName}} {{director.lastName}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="btn btn-group">
+                                    <button class="btn btn-success" [disabled]="updateForm.invalid" type="submit"> {{'films-detail.UPDATE' | translate}}</button>
+                                    <button class="btn btn-warning" type="reset"> {{'director.form.CANCEL'|translate}}</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
