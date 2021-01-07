@@ -8,8 +8,10 @@ Back (in myfilmlist)
 
  Front (in frontFilmList)
  
-`npm install`
+`npm install` then 
 `ng serve`
+
+GO TO `http://localhost:4200/`
 
 ## Includes :
 + Delete, getAll, create, getById, update for films
