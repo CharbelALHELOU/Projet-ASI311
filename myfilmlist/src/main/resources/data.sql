@@ -5,7 +5,8 @@ INSERT INTO Director(lastName, firstName, birthDate) VALUES('Tarantino', 'Quenti
 INSERT INTO Director(lastName, firstName, birthDate) VALUES('Demme', 'Jonathan', '1944-02-22');
 INSERT INTO Director(lastName, firstName, birthDate) VALUES('Jackson', 'Peter', '1961-10-31');
 INSERT INTO Director(lastName, firstName, birthDate) VALUES('Wan', 'James', '1977-02-26');
-INSERT INTO Director(lastName, firstName, birthDate) VALUES('Wachowski', 'Lily & Lana', '1965-06-21');
+INSERT INTO Director(lastName, firstName, birthDate) VALUES('Alhelou', 'Charbel', '1998-07-12');
+INSERT INTO Director(lastName, firstName, birthDate) VALUES('Rowling', 'JK', '1965-06-21');
 INSERT INTO Film(titre, duration, directorID) VALUES('Matrix', 150, 6);
 INSERT INTO Film(titre, duration, directorID) VALUES('Le silence des Agneaux', 138, 3);
 INSERT INTO Film(titre, duration, directorID) VALUES('Saw', 103, 5);
@@ -15,7 +16,16 @@ INSERT INTO Film(titre, duration, directorID) VALUES('Le seigneur des anneaux 3'
 INSERT INTO Film(titre, duration, directorID) VALUES('Les huits Salopards', 220,2);
 INSERT INTO Film(titre, duration, directorID) VALUES('Django : Unchained', 205,2);
 INSERT INTO Film(titre, duration, directorID) VALUES('Inglorious Basterds', 220,2);
-INSERT INTO Film(titre, duration, directorID) VALUES('Kill Bill', 220,2);
-INSERT INTO Film(titre, duration, directorID) VALUES('Kill Bill : Vol 2', 250,2);
-INSERT INTO Film(titre, duration, directorID) VALUES('Shining', 180,1);
-INSERT INTO Film(titre, duration, directorID) VALUES('2001 , lOdyssée de lEspace', 192,1);
+INSERT INTO Film(titre, duration, directorID) VALUES('Harry Potter', 220,7);
+INSERT INTO Film(titre, duration, directorID) VALUES('Un film', 220,5);
+INSERT INTO Film(titre, duration, directorID) VALUES('Matrix 2', 150, 6);
+INSERT INTO Film(titre, duration, directorID) VALUES('Le silence des Agneaux 2', 138, 3);
+INSERT INTO Film(titre, duration, directorID) VALUES('Saw 2', 103, 5);
+INSERT INTO Film(titre, duration, directorID) VALUES('Le seigneur des anneaux 1 2', 190,4);
+INSERT INTO Film(titre, duration, directorID) VALUES('Le seigneur des anneaux 2 2', 205,4);
+INSERT INTO Film(titre, duration, directorID) VALUES('Le seigneur des anneaux 3 2', 220,4);
+INSERT INTO Film(titre, duration, directorID) VALUES('Les huits Salopards 2', 220,2);
+INSERT INTO Film(titre, duration, directorID) VALUES('Django : Unchained2', 205,2);
+INSERT INTO Film(titre, duration, directorID) VALUES('Harry Potter 2', 220,7);
+INSERT INTO Film(titre, duration, directorID) VALUES('Un film 2', 220,5);
+
